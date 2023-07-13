@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Include the D3.js library -->
+  <script src="https://d3js.org/d3.v7.js"></script>
+  <!-- Include the TopoJSON Client library -->
+  <script src="https://unpkg.com/topojson@3.0.2/dist/topojson.js"></script>
+  <!-- Include the d3 annotation library-->
+  <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+  <!-- Include local scripts -->
+  <script src="scripts/helpers.js"></script>
+  <script src="scripts/home.js"></script>
+  <script src="scripts/chart1.js"></script>
+  <script src="scripts/chart2.js"></script>
+  <script src="scripts/chart3.js"></script>
+
+  <title>CS416 Narrative Visualization Project</title>
+  <link rel="stylesheet" href="styles/defaults.css">
+  <link rel="stylesheet" href="styles/slider.css">
+  <style>
+    body {
+      font-family: "Times New Roman", Georgia, Serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Playfair Display";
+      letter-spacing: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slides">
+        <div id="slides__1" class="slide">
+          <h1 id="header0">Have you wondered whether there are any patterns in birth rates for different states? </h1>
+          <h2 id="desc1">Which states have the most births? </h2>
+          <h2 id="desc2">Are there any correlations between a mother's age, education level and the weight of her baby?
+          </h2>
+          <h2 id="desc3">Are there any recent changes in trends in birth rates? </h2>
+          <h4 id="desc4">Data Source: <a
+              href="https://www.kaggle.com/datasets/danbraswell/temporary-us-births?select=us_births_2016_2021.csv">US
+              Births by Year, State, and Education Level</a> </h4>
+          <a class="slide__prev" href="#slides__4" title="Next"></a>
+          <a class="slide__next" href="#slides__2" title="Next"></a>
+        </div>
+        <div id="slides__2" class="slide">
+          <script>loadGeoMap()</script>
+          <h2 id="header1">Total Number of Births by State</h2>
+          <h3 id="desc21">Below is a heatmap of the number of births from 2016 to 2021 for each state. Notice that
+            California and Texas have the most births. Please hover over the states for exact figures.</h3>
+          <div id="chart1"></div>
+          <a class="slide__prev" href="#slides__1" title="Prev"></a>
+          <a class="slide__next" href="#slides__3" title="Next"></a>
+        </div>
+        <div id="slides__3" class="slide">
+          <script>loadBarChart()</script>
+          <h2 id="header3">Top States by Number of Births split by Mother's Education Level </h2>
+          <div id="chart2"></div>
+          <div id="test"></div>
+          <div id="yearAlign1" class="text-center">
+            <div id="yearSlider" class="slider">
+              <input type="range" id="year2" min="0" max="6" step="1" value="0" list="allyears"
+                oninput="loadBarChart()">
+              <datalist id="allyears2">
+                <option value="all" label="All Years"></option>
+                <option value="2016" label="2016"></option>
+                <option value="2017" label="2017"></option>
+                <option value="2018" label="2018"></option>
+                <option value="2019" label="2019"></option>
+                <option value="2020" label="2020"></option>
+                <option value="2021" label="2021"></option>
+              </datalist>
+            </div>
+          </div>
+          <a class="slide__prev" href="#slides__2" title="Prev"></a>
+          <a class="slide__next" href="#slides__4" title="Next"></a>
+        </div>
+        <div id="slides__4" class="slide">
+          <script>loadScatterPlot()</script>
+          <h2 id="header2">Relationship between Birth Weight vs. Average Age of Mother</h2>
+          <div id="dropdown">
+            <b> Select the education level of mother </b>
+            <select id="eduLvlList" onchange="loadScatterPlot()">
+              <option value="0"> ---Select--- </option>
+              <option value="1"> 8th grade or less </option>
+              <option value="2"> 9th through 12th grade with no diploma </option>
+              <option value="3"> High school graduate or GED completed </option>
+              <option value="4"> Some college credit, but not a degree </option>
+              <option value="5"> Associate degree (AA, AS) </option>
+              <option value="6"> Bachelor's degree (BA, AB, BS) </option>
+              <option value="7"> Master's degree (MA, MS, MEng, MEd, MSW, MBA) </option>
+              <option value="8"> Doctorate (PhD, EdD) or Professional Degree (MD, DDS, DVM, LLB, JD) </option>
+              <option value="-9"> Unknown or Not Stated </option>
+            </select>
+          </div>
+          <div id="chart3"></div>
+          <div id="yearAlign2" class="text-center">
+            <div id="yearSlider2" class="slider">
+              <input type="range" id="year" min="0" max="6" step="1" value="0" list="allyears"
+                oninput="loadScatterPlot()">
+              <datalist id="allyears">
+                <option value="all" label="All Years"></option>
+                <option value="2016" label="2016"></option>
+                <option value="2017" label="2017"></option>
+                <option value="2018" label="2018"></option>
+                <option value="2019" label="2019"></option>
+                <option value="2020" label="2020"></option>
+                <option value="2021" label="2021"></option>
+              </datalist>
+            </div>
+          </div>
+          <a class="slide__prev" href="#slides__3" title="Prev"></a>
+          <a class="slide__next" href="#slides__1" title="Prev"></a>
+        </div>
+      </div>
+      <div class="slider__nav">
+        <a class="slider__navlink" href="#slides__1"></a>
+        <a class="slider__navlink" href="#slides__2"></a>
+        <a class="slider__navlink" href="#slides__3"></a>
+        <a class="slider__navlink" href="#slides__4"></a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
